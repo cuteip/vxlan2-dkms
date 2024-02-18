@@ -489,7 +489,7 @@ out:
 	rcu_read_unlock();
 	return rc;
 }
-EXPORT_SYMBOL_GPL(vxlan_fdb_find_uc);
+// EXPORT_SYMBOL_GPL(vxlan_fdb_find_uc);
 
 static int vxlan_fdb_notify_one(struct notifier_block *nb,
 				const struct vxlan_dev *vxlan,
@@ -541,7 +541,7 @@ unlock:
 	spin_unlock_bh(&vxlan->hash_lock[h]);
 	return rc;
 }
-EXPORT_SYMBOL_GPL(vxlan_fdb_replay);
+// EXPORT_SYMBOL_GPL(vxlan_fdb_replay);
 
 void vxlan_fdb_clear_offload(const struct net_device *dev, __be32 vni)
 {
@@ -564,7 +564,7 @@ void vxlan_fdb_clear_offload(const struct net_device *dev, __be32 vni)
 	}
 
 }
-EXPORT_SYMBOL_GPL(vxlan_fdb_clear_offload);
+// EXPORT_SYMBOL_GPL(vxlan_fdb_clear_offload);
 
 /* Replace destination of unicast mac */
 static int vxlan_fdb_replace(struct vxlan_fdb *f,
@@ -4470,7 +4470,7 @@ struct net_device *vxlan_dev_create(struct net *net, const char *name,
 
 	return dev;
 }
-EXPORT_SYMBOL_GPL(vxlan_dev_create);
+// EXPORT_SYMBOL_GPL(vxlan_dev_create);
 
 static void vxlan_handle_lowerdev_unregister(struct vxlan_net *vn,
 					     struct net_device *dev)
