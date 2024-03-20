@@ -1,6 +1,9 @@
 KDIR ?= /lib/modules/$(KVER)/build
 
-ifeq ($(findstring 6.2.,$(KVER)),6.2.)
+ifeq ($(findstring 6.1.,$(KVER)),6.1.)
+	SRC_VERSION := v6.1
+	include ./src/$(SRC_VERSION)/Makefile
+else ifeq ($(findstring 6.2.,$(KVER)),6.2.)
 	SRC_VERSION := v6.2
 	include ./src/$(SRC_VERSION)/Makefile
 else ifeq ($(findstring 6.3.,$(KVER)),6.3.)
