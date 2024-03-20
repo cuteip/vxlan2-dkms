@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         KERNEL_VERSION:
+          - 6.1
           - 6.2
           - 6.3
           - 6.4
