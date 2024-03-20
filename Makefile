@@ -2,19 +2,14 @@ KDIR ?= /lib/modules/$(KVER)/build
 
 ifeq ($(findstring 6.1.,$(KVER)),6.1.)
 	SRC_VERSION := v6.1
-	include ./src/$(SRC_VERSION)/Makefile
 else ifeq ($(findstring 6.2.,$(KVER)),6.2.)
 	SRC_VERSION := v6.2
-	include ./src/$(SRC_VERSION)/Makefile
 else ifeq ($(findstring 6.3.,$(KVER)),6.3.)
 	SRC_VERSION := v6.3
-	include ./src/$(SRC_VERSION)/Makefile
 else ifeq ($(findstring 6.4.,$(KVER)),6.4.)
 	SRC_VERSION := v6.4
-	include ./src/$(SRC_VERSION)/Makefile
 else ifeq ($(findstring 6.5.,$(KVER)),6.5.)
 	SRC_VERSION := v6.5
-	include ./src/$(SRC_VERSION)/Makefile
 else
 	$(error not implemented for KVER=$(KVER))
 endif
