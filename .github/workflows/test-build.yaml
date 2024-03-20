@@ -9,12 +9,20 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        KERNEL_VERSION:
+          - 6.1
+          - 6.2
+          - 6.3
+          - 6.4
+          - 6.5
     env:
-      KERNEL_VERSION: 6.5
+      KERNEL_VERSION: ${{ matrix.KERNEL_VERSION }}
 
     steps:
     - uses: actions/checkout@v4
-    - run: sudo apt-get install linux-azure-$KERNEL_VERSION
+    - run: sudo ./scripts/ci/setup-linux-headers-v${KERNEL_VERSION}.sh
     - run: sudo apt-get install dkms
 
     - name: Setup env
