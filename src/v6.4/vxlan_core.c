@@ -2577,7 +2577,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		}
 
 		err = skb_tunnel_check_pmtu(skb, ndst, VXLAN6_HEADROOM,
-					    netif_is_any_bridge_port(dev));
+					    false);
 		if (err < 0) {
 			goto tx_error;
 		} else if (err) {
@@ -2608,6 +2608,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		if (err < 0)
 			goto tx_error;
 
+		skb->ignore_df = 1;
 		udp_tunnel6_xmit_skb(ndst, sock6->sock->sk, skb, dev,
 				     &local_ip.sin6.sin6_addr,
 				     &dst->sin6.sin6_addr, tos, ttl,
@@ -4718,5 +4719,5 @@ module_exit(vxlan_cleanup_module);
 MODULE_LICENSE("GPL");
 MODULE_VERSION(VXLAN_VERSION);
 MODULE_AUTHOR("Stephen Hemminger <stephen@networkplumber.org>");
-MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic");
+MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic (ignore-df patch)");
 MODULE_ALIAS_RTNL_LINK("vxlan");
