@@ -2624,9 +2624,16 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 				goto out_unlock;
 		}
 
+		// skb_tunnel_check_pmtu() の reply が true の場合、
+		// fragmentation needed や packet too big の ICMP エラーが返される（返されててしまう）。
+		// ignore-df するとき、PMTU の結果を返答する必要がないので、reply = false にして返さないようにする。
+		// patch 前は、以下のような packet too big のメッセージを返答する挙動がみられた。
+		// 18:05:59.020745 52:54:00:35:59:c7 > 52:54:00:d7:36:c7, ethertype IPv6 (0x86dd), length 1294: (hlim 64, next-header ICMPv6 (58) payload length: 1240) fd11:bbbb::1 > fd11:bbbb::2: [bad icmp6 cksum 0xb644 -> 0x4099!] ICMP6, packet too big, mtu 1430
+		// 参考：
+		// - https://lore.kernel.org/netdev/c7b3e4800ea02d964bab7dd9f349e0a0720bff2d.1596487323.git.sbrivio@redhat.com/
 		err = skb_tunnel_check_pmtu(skb, ndst,
 					    vxlan_headroom((flags & VXLAN_F_GPE) | VXLAN_F_IPV6),
-					    netif_is_any_bridge_port(dev));
+					    false);
 		if (err < 0) {
 			goto tx_error;
 		} else if (err) {
@@ -2657,6 +2664,12 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		if (err < 0)
 			goto tx_error;
 
+		// inner で DF=1 だったとしても、outer は DF=0 になってほしい。
+		// vxlan_xmit() のコメントでは inner の DF を outer に継承する、と書かれているが、
+		// ここの ignore_df 書き換えはそれを無視する形
+		// 参考：
+		// - OpenVPN で outer IPv6 パケットの ignore_df: https://github.com/OpenVPN/ovpn-dco/commit/3ba6c07ababd4d491c77f5327f8105bead6ddccc
+		skb->ignore_df = 1;
 		udp_tunnel6_xmit_skb(ndst, sock6->sock->sk, skb, dev,
 				     &local_ip.sin6.sin6_addr,
 				     &dst->sin6.sin6_addr, tos, ttl,
@@ -4784,5 +4797,5 @@ module_exit(vxlan_cleanup_module);
 MODULE_LICENSE("GPL");
 MODULE_VERSION(VXLAN_VERSION);
 MODULE_AUTHOR("Stephen Hemminger <stephen@networkplumber.org>");
-MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic");
+MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic (ignore-df patch)");
 MODULE_ALIAS_RTNL_LINK("vxlan");
