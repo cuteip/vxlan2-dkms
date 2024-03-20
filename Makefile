@@ -14,7 +14,6 @@ else
 	$(error not implemented for KVER=$(KVER))
 endif
 
-# GitHub Actions の linux-headers-*-azure だと CONFIG_VXLAN=y
 default:
 	@echo "KVER=$(KVER)"
 	@echo "KDIR=$(KDIR)"
