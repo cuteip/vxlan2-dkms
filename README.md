@@ -9,7 +9,7 @@ https://github.com/cuteip/vxlan2-dkms/releases
 ```shell
 sudo apt install dkms -y
 
-VXLAN2_DKMS_VERSION=0.3
+VXLAN2_DKMS_VERSION=0.4
 wget https://github.com/cuteip/vxlan2-dkms/releases/download/v${VXLAN2_DKMS_VERSION}/vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 sudo apt install -y ./vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 ```
