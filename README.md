@@ -24,3 +24,7 @@ sudo apt install -y ./vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 ## Upstream / Original
 
 https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/net/vxlan
+
+## Appendix
+
+- [Linux Kernel の VXLAN 実装へ IP フラグメントを許容するパッチと DKMS パッケージの紹介 - CuteIP](https://www.cuteip.net/posts/2024/04/09/cuteip-updates-5-vxlan2-dkms/)
