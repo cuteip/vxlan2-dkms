@@ -2,6 +2,6 @@
 # Makefile for the vxlan driver
 #
 
-obj-$(CONFIG_VXLAN) += vxlan.o
+obj-$(CONFIG_VXLAN) += vxlan2.o
 
-vxlan-objs := vxlan_core.o vxlan_multicast.o vxlan_vnifilter.o
+vxlan2-objs := vxlan_core.o vxlan_multicast.o vxlan_vnifilter.o
