@@ -2648,6 +2648,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 		if (err < 0)
 			goto tx_error;
 
+		skb->ignore_df = 1;
 		udp_tunnel6_xmit_skb(ndst, sock6->sock->sk, skb, dev,
 				     &local_ip.sin6.sin6_addr,
 				     &dst->sin6.sin6_addr, tos, ttl,
