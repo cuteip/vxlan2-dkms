@@ -18,6 +18,7 @@ jobs:
           - 6.4
           - 6.5
           - 6.6
+          - 6.7
     env:
       KERNEL_VERSION: ${{ matrix.KERNEL_VERSION }}
 
