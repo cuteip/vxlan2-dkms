@@ -2447,7 +2447,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 
 		ndst = &rt->dst;
 		err = skb_tunnel_check_pmtu(skb, ndst, vxlan_headroom(flags & VXLAN_F_GPE),
-					    false);
+					    netif_is_any_bridge_port(dev));
 		if (err < 0) {
 			goto tx_error;
 		} else if (err) {
@@ -2506,7 +2506,7 @@ void vxlan_xmit_one(struct sk_buff *skb, struct net_device *dev,
 
 		err = skb_tunnel_check_pmtu(skb, ndst,
 					    vxlan_headroom((flags & VXLAN_F_GPE) | VXLAN_F_IPV6),
-					    netif_is_any_bridge_port(dev));
+					    false);
 		if (err < 0) {
 			goto tx_error;
 		} else if (err) {
