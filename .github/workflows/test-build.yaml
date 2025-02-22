@@ -37,7 +37,7 @@ jobs:
     - name: Setup env
       run: |
         set -x
-        KERNEL_VERSION2=$(find /lib/modules -type d -name "$KERNEL_VERSION*" -printf '%f\n')
+        KERNEL_VERSION2=$(find /lib/modules -type d -name "$KERNEL_VERSION*-generic" -printf '%f\n')
         MODULE_NAME=$(awk -F= '/PACKAGE_NAME/ {print $2}' dkms.conf | sed 's/"//g')
         MODULE_VERSION=$(awk -F= '/PACKAGE_VERSION/ {print $2}' dkms.conf | sed 's/"//g')
         echo "MODULE_NAME=$MODULE_NAME" >> $GITHUB_ENV
