@@ -24,6 +24,8 @@ else ifeq ($(findstring 6.11.,$(KVER)),6.11.)
 	SRC_VERSION := v6.11
 else ifeq ($(findstring 6.12.,$(KVER)),6.12.)
 	SRC_VERSION := v6.12
+else ifeq ($(findstring 6.13.,$(KVER)),6.13.)
+	SRC_VERSION := v6.13
 else
 	$(error not implemented for KVER=$(KVER))
 endif
