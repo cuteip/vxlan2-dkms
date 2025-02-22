@@ -9,14 +9,14 @@ https://github.com/cuteip/vxlan2-dkms/releases
 ```shell
 sudo apt install dkms -y
 
-VXLAN2_DKMS_VERSION=0.8
+VXLAN2_DKMS_VERSION=0.9
 wget https://github.com/cuteip/vxlan2-dkms/releases/download/v${VXLAN2_DKMS_VERSION}/vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 sudo apt install -y ./vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 ```
 
 ## Limitations
 
-- Supported Linux Kernel versions: 6.1 - 6.8
+- Supported Linux Kernel versions: 6.1 - 6.13
 - Supports only IPv6 underlying network
   - It's likely that applying a similar patch would make the underlying network work with IPv4 as well.
 - The upstream vxlan module will be blacklisted when installing vxlan2-dkms
