@@ -36,6 +36,8 @@
 
 #include "vxlan_private.h"
 
+#include "vxlan.h"
+
 #define VXLAN_VERSION	"0.1"
 
 #define FDB_AGE_DEFAULT 300 /* 5 min */
