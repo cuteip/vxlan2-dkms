@@ -16,7 +16,7 @@ sudo apt install -y ./vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
 
 ## Limitations
 
-- Supported Linux Kernel versions: 6.1 - 6.13
+- Supported Linux Kernel versions: ???
 - Supports only IPv6 underlying network
   - It's likely that applying a similar patch would make the underlying network work with IPv4 as well.
 - The upstream vxlan module will be blacklisted when installing vxlan2-dkms
