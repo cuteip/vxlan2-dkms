@@ -15,8 +15,8 @@ jobs:
       - run: sudo apt-get install -y dkms
       - run: sudo dkms add .
       - run: |
-          MODULE_NAME=$(awk -F= '/PACKAGE_NAME/ {print $2}' dkms.conf | sed 's/"//g')
-          MODULE_VERSION=$(awk -F= '/PACKAGE_VERSION/ {print $2}' dkms.conf | sed 's/"//g')
+          MODULE_NAME=$(awk -F= '/^PACKAGE_NAME/ {print $2}' dkms.conf | sed 's/"//g')
+          MODULE_VERSION=$(awk -F= '/^PACKAGE_VERSION/ {print $2}' dkms.conf | sed 's/"//g')
           dkms mktarball -m "${MODULE_NAME}" -v "${MODULE_VERSION}" --source-only --archive "./${MODULE_NAME}-${MODULE_VERSION}-source-only.dkms.tar.gz"
       - uses: softprops/action-gh-release@v1
         with:

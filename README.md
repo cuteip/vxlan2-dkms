@@ -7,16 +7,16 @@ vxlan2 is a patched version of the vxlan module in the Linux kernel that allows 
 https://github.com/cuteip/vxlan2-dkms/releases
 
 ```shell
-sudo apt install dkms -y
+DEBIAN_FRONTEND=noninteractive sudo -E apt install -y dkms linux-source patch linux-headers-amd64
 
 VXLAN2_DKMS_VERSION=0.9
-wget https://github.com/cuteip/vxlan2-dkms/releases/download/v${VXLAN2_DKMS_VERSION}/vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
-sudo apt install -y ./vxlan2-dkms_${VXLAN2_DKMS_VERSION}_all.deb
+wget https://github.com/cuteip/vxlan2-dkms/releases/download/v${VXLAN2_DKMS_VERSION}/vxlan2-${VXLAN2_DKMS_VERSION}-source-only.dkms.tar.gz
+sudo dkms install ./vxlan2-${VXLAN2_DKMS_VERSION}-source-only.dkms.tar.gz
 ```
 
 ## Limitations
 
-- Supported Linux Kernel versions: 6.1 - 6.13
+- Supported Linux Kernel versions: ???
 - Supports only IPv6 underlying network
   - It's likely that applying a similar patch would make the underlying network work with IPv4 as well.
 - The upstream vxlan module will be blacklisted when installing vxlan2-dkms

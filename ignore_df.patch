@@ -1,0 +1,26 @@
+--- vxlan_core.c.orig	2026-03-12 08:36:01.166759206 +0000
++++ vxlan_core.c	2026-03-12 08:42:40.973257124 +0000
+@@ -2579,7 +2579,7 @@
+ 
+ 		err = skb_tunnel_check_pmtu(skb, ndst,
+ 					    vxlan_headroom((flags & VXLAN_F_GPE) | VXLAN_F_IPV6),
+-					    netif_is_any_bridge_port(dev));
++					    false);
+ 		if (err < 0) {
+ 			goto tx_error;
+ 		} else if (err) {
+@@ -2609,6 +2609,7 @@
+ 			goto tx_error;
+ 		}
+ 
++		skb->ignore_df = 1;
+ 		udp_tunnel6_xmit_skb(ndst, sock6->sock->sk, skb, dev,
+ 				     &saddr, &pkey->u.ipv6.dst, tos, ttl,
+ 				     pkey->label, src_port, dst_port, !udp_sum,
+@@ -5005,5 +5006,5 @@
+ MODULE_LICENSE("GPL");
+ MODULE_VERSION(VXLAN_VERSION);
+ MODULE_AUTHOR("Stephen Hemminger <stephen@networkplumber.org>");
+-MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic");
++MODULE_DESCRIPTION("Driver for VXLAN encapsulated traffic (ignore-df patch)");
+ MODULE_ALIAS_RTNL_LINK("vxlan");
