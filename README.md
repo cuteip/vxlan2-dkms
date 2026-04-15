@@ -9,7 +9,7 @@ https://github.com/cuteip/vxlan2-dkms/releases
 ```shell
 DEBIAN_FRONTEND=noninteractive sudo -E apt install -y dkms linux-source patch linux-headers-amd64
 
-VXLAN2_DKMS_VERSION=0.9
+VXLAN2_DKMS_VERSION=0.11
 wget https://github.com/cuteip/vxlan2-dkms/releases/download/v${VXLAN2_DKMS_VERSION}/vxlan2-${VXLAN2_DKMS_VERSION}-source-only.dkms.tar.gz
 sudo dkms install ./vxlan2-${VXLAN2_DKMS_VERSION}-source-only.dkms.tar.gz
 ```
